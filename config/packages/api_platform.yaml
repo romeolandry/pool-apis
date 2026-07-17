@@ -1,7 +1,31 @@
 api_platform:
     title: Pool APIs
     version: 1.0.0
+    show_webby: false
+    enable_swagger:       false
+    enable_docs:          false
+    # Enable the data collector and the WebProfilerBundle integration.
+    enable_profiler:      false
+    # Enable Swagger UI
+    enable_swagger_ui:    false
+    formats:
+        json: ["application/json"]
+        # jsonld: ["application/ld+json"]
+        # jsonhal: ["application/hal+json"]
+        # jsonapi: ["application/vnd.api+json"]        
+        # xml: ["application/xml", "text/xml"]
+        # yaml: ["application/x-yaml"]
+        # csv: ["text/csv"]
+        # html: ["text/html"]
+        # myformat: ["application/vnd.myformat"]
     defaults:
         stateless: true
         cache_headers:
             vary: ['Content-Type', 'Authorization', 'Origin']
+
+when@dev:
+    api_platform:
+        enable_swagger:       true
+        enable_docs:          true
+        enable_profiler:      true
+        enable_swagger_ui:    true
