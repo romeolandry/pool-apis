@@ -59,7 +59,7 @@ configuration.
 
 ### Using a remote model
 
-Set the API key for your provider (Anthropic, OpenAI, OpenRouter, etc.) as documented by
+Set the API key for your provider (ANTHROPIC, OpenAI, OpenRouter, etc.) as documented by
 OpenCode. With the [firewall](#optional-network-sandbox) enabled, add the provider's API domain
 to the allowlist.
 

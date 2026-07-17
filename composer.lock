@@ -3124,7 +3124,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Symfony\\AI\\Platform\\Bridge\\Anthropic\\": ""
+                    "Symfony\\AI\\Platform\\Bridge\\ANTHROPIC\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3145,7 +3145,7 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Anthropic (Claude) platform bridge for Symfony AI",
+            "description": "ANTHROPIC (Claude) platform bridge for Symfony AI",
             "keywords": [
                 "Bridge",
                 "ai",

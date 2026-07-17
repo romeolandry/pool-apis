@@ -11,6 +11,9 @@ ai:
             api_key: '%env(GEMINI_API_KEY)%'
             # Optional: Specify a default model, e.g., 'gemini-2.5-flash'
             ## model: '%env(GEMINI_MODEL)%'
+        anthropic:
+            api_key: '%env(ANTHROPIC_API_KEY)%'
+            version: '%env(ANTHROPIC_VERSION)%'
 
     agent:
         # Agent configuration

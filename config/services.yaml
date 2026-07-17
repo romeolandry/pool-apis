@@ -10,6 +10,9 @@ parameters:
     ## load gemini credentials
     gemini_api_key: '%env(GEMINI_API_KEY)%'
     gemini_model: '%env(GEMINI_MODEL)%'
+    ANTHROPIC_api_key: '%env(ANTHROPIC_API_KEY)%'
+    ANTHROPIC_model: '%env(ANTHROPIC_MODEL)%'
+    ANTHROPIC_version: '%env(ANTHROPIC_VERSION)%'
 
 services:
     # default configuration for services in *this* file
@@ -29,3 +32,9 @@ services:
             $aiPlatform: '@ai.traceable_platform.gemini'
             $geminiApiKey: '%gemini_api_key%'
             $geminiModel: '%gemini_model%'
+
+    App\Services\AnthropicService:
+        arguments:
+            $anthropicApikey: '%ANTHROPIC_api_key%'
+            $anthropicModel: '%ANTHROPIC_model%'
+            $anthropicVersion: '%ANTHROPIC_version%'
