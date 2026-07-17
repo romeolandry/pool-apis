@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+
 use Symfony\AI\Platform\PlatformInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 

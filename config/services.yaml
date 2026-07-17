@@ -26,5 +26,6 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Services\GeminiService:
         arguments:
+            $aiPlatform: '@ai.traceable_platform.gemini'
             $geminiApiKey: '%gemini_api_key%'
             $geminiModel: '%gemini_model%'
