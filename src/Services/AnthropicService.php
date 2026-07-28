@@ -3,27 +3,17 @@
 namespace App\Services;
 
 
-
+use App\Services\BaseAiService;
+use App\Services\Utilities\ModelAvailabilityGate;
 use Symfony\AI\Platform\Bridge\Anthropic\Factory;
 use Symfony\AI\Platform\Bridge\Anthropic\ModelCatalog;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class AnthropicService
+class AnthropicService extends BaseAiService
 {
-    private $ANTHROPICFactory;
 
     const ANTHROPIC_BASE_URL = 'https://api.anthropic.com/v1/';
-
-    public function __construct(
-        private readonly HttpClientInterface $httpClient,
-        private readonly string $anthropicApikey,
-        private readonly string $anthropicModel,
-        private readonly string $anthropicVersion
-    ) { 
-        $this->ANTHROPICFactory = Factory::createPlatform(
-            apiKey: $this->anthropicApikey
-        );    
-    }
 
     /**
      * Récupère et filtre les modèles ANTHROPIC disponibles et exploitables.
@@ -66,10 +56,15 @@ class AnthropicService
 
             $usableModels = [];
 
-            foreach ($response as $model_name) {
-                
-                if (!str_contains($model_name, 'pro')) {
-                    $usableModels[] = $model_name;
+            foreach ($response as $name => $anthropicModel) {
+
+                $availability = $this->checkAvailability($name);
+                if($availability['available']) {
+                    $usableModels[] = [
+                        'name' => $name,
+                        'model' => $anthropicModel,
+                        'availability' => $availability
+                    ];
                 }
             }
             return $usableModels;
