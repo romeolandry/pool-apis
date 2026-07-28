@@ -19,6 +19,10 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            # Binds $geminiApiKey for any service expecting a string parameter with this exact name
+            string $geminiApiKey: '%env(GEMINI_API_KEY)%'
+            string $anthropicApikey: '%env(ANTHROPIC_API_KEY)%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -27,14 +31,21 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Services\GeminiService:
-        arguments:
-            $aiPlatform: '@ai.traceable_platform.gemini'
-            $geminiApiKey: '%gemini_api_key%'
-            $geminiModel: '%gemini_model%'
+    # App\Services\GeminiService:
+    #     arguments:
+    #         $aiPlatform: '@ai.traceable_platform.gemini'
+    #         $geminiApiKey: '%gemini_api_key%'
+    #         $geminiModel: '%gemini_model%'
 
-    App\Services\AnthropicService:
-        arguments:
-            $anthropicApikey: '%ANTHROPIC_api_key%'
-            $anthropicModel: '%ANTHROPIC_model%'
-            $anthropicVersion: '%ANTHROPIC_version%'
+    # App\Services\AnthropicService:
+    #     arguments:
+    #         $anthropicApikey: '%ANTHROPIC_api_key%'
+    #         $anthropicModel: '%ANTHROPIC_model%'
+    #         $anthropicVersion: '%ANTHROPIC_version%'
+
+    Symfony\AI\Platform\Bridge\Anthropic\Factory: ~
+    Symfony\AI\Platform\Bridge\Gemini\Factory: ~
+    
+
+    App\Services\BaseAiService:
+        abstract: true
